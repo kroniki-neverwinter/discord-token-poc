@@ -54,6 +54,11 @@
     button:active {
       background-color: #3c43a1;
     }
+    /* Center login button */
+    #loginButton {
+      display: block;
+      margin: 20px auto;
+    }
     /* Form Container Styling */
     #formContainer {
       display: none;
@@ -160,7 +165,6 @@
       })
       .then(userData => {
         document.getElementById('loginButton').style.display = 'none';
-        document.getElementById('message').style.display = 'none';
         // Fill the non-editable Discord field with the fetched username
         document.getElementById('discordUsername').value = userData.username;
         // Set the hidden access token field
@@ -170,7 +174,6 @@
       })
       .catch(error => {
         console.error('Error:', error);
-        document.getElementById('message').innerText = `Failed to retrieve user information`;
       });
     };
     function redirectToDiscordAuth() {
@@ -188,7 +191,6 @@
 </head>
 <body>
   <div id="container">
-    <p id="message">Please log in with Discord.</p>
     <button id="loginButton" style="display:none;" onclick="redirectToDiscordAuth()">Login with Discord</button>
     <!-- Character Form -->
     <div id="formContainer">
@@ -345,7 +347,9 @@
               Rys psychologiczny:
               <span class="tooltip-container">
                 <button type="button" class="tooltip-button">?</button>
-                <span class="tooltip-text">Moralność i filozofia, charakterystyka intelektualna, motywacje, co postać lubi/nie lubi, wady, zalety, hobby, stosunek do innych, co wywołuje w postaci silne emocje (strach, wściekłość, euforię), stosunek do innych ras, klas czy wyznań, sposób radzenia sobie z problemami (siłowo, sprytem, magią, stopień zaradności i samodzielności życiowej)</span>
+                <span class="tooltip-text">
+                  Moralność i filozofia, charakterystyka intelektualna, motywacje, co postać lubi/nie lubi, wady, zalety, hobby, stosunek do innych, co wywołuje w postaci silne emocje (strach, wściekłość, euforię), stosunek do innych ras, klas czy wyznań, sposób radzenia sobie z problemami (siłowo, sprytem, magią, stopień zaradności i samodzielności życiowej)
+                </span>
               </span>
             </label>
             <textarea id="characterPsychology" name="characterPsychology" rows="6" style="resize:vertical;"></textarea>
@@ -360,7 +364,7 @@
             </label>
             <textarea id="deityView" name="deityView" rows="6" style="resize:vertical;"></textarea>
           </div>
-          <!-- File Upload Field moved here -->
+          <!-- File Upload Field -->
           <div class="form-field">
             <label for="attachment">
               Załącznik:
