@@ -84,6 +84,50 @@
     .radio-group input[type="radio"] {
       margin-right: 5px;
     }
+
+    /* Tooltip styling */
+    .tooltip-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .tooltip-button {
+      background-color: #5865F2;
+      border: none;
+      color: #fff;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 14px;
+      cursor: default;
+      padding: 0;
+      margin-left: 5px;
+      line-height: 20px;
+      text-align: center;
+    }
+
+    .tooltip-text {
+      visibility: hidden;
+      width: 160px;
+      background-color: #2f3136;
+      color: #dcddde;
+      text-align: center;
+      border-radius: 5px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; /* Position above the button */
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+
+    .tooltip-container:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
   </style>
   <script>
     window.onload = function() {
@@ -165,7 +209,13 @@
           <input type="text" id="discordUsername" name="discordUsername" readonly>
         </div>
         <div class="form-field">
-          <label for="characterClass" title="Planowane klasy postaci.">Klasy Postaci:</label>
+          <label for="characterClass">
+            Klasy Postaci:
+            <span class="tooltip-container">
+              <button type="button" class="tooltip-button">?</button>
+              <span class="tooltip-text">Planowane klasy postaci.</span>
+            </span>
+          </label>
           <input type="text" id="characterClass" name="characterClass" required>
         </div>
         <div class="form-field">
