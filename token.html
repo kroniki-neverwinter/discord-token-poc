@@ -130,7 +130,7 @@
       padding: 5px;
       position: absolute;
       z-index: 1;
-      bottom: 125%; /* Position above the button */
+      bottom: 125%;
       left: 50%;
       transform: translateX(-50%);
       opacity: 0;
@@ -175,28 +175,38 @@
       .catch(error => {
         console.error('Error:', error);
       });
+      
+      // Add file size check for the attachment (limit: 2MB)
+      var attachmentInput = document.getElementById('attachment');
+      if (attachmentInput) {
+        attachmentInput.addEventListener('change', function () {
+          const maxSizeInBytes = 10 * 1024 * 1024; // 2MB limit
+          const file = this.files[0];
+          if (file && file.size > maxSizeInBytes) {
+            alert("Maksymalny rozmiar pliku 10MB!");
+            this.value = ""; // Clear the file input
+          }
+        });
+      }
     };
+
     function redirectToDiscordAuth() {
       window.location.href = 'https://discord.com/oauth2/authorize?client_id=712607067420229685&response_type=code&redirect_uri=https%3A%2F%2Fkn-discord.azurewebsites.net%2Fapi%2Fcallback&scope=identify';
-    }
-    // Optional: Handle form submission
-    function handleFormSubmit(e) {
-      e.preventDefault();
-      const formData = new FormData(e.target);
-      console.log(Object.fromEntries(formData));
-      alert('Form submitted!');
-      // Add your form submission logic here.
     }
   </script>
 </head>
 <body>
   <div id="container">
+    <!-- Centered Login Button -->
     <button id="loginButton" style="display:none;" onclick="redirectToDiscordAuth()">Login with Discord</button>
-    <!-- Character Form -->
+    
+    <!-- Form Container (initially hidden until login is complete) -->
     <div id="formContainer">
+      <!-- Update the form action to your Azure Function endpoint URL -->
       <form id="characterForm" action="https://kn-form.azurewebsites.net/api/ProcessCharacterForm" method="post" enctype="multipart/form-data">
         <!-- Hidden field for the access token -->
         <input type="hidden" id="accessTokenField" name="accessToken" value="">
+
         <!-- Section: Dane postaci -->
         <fieldset>
           <legend>Dane postaci:</legend>
@@ -291,6 +301,7 @@
             <input type="text" id="characterLanguages" name="characterLanguages">
           </div>
         </fieldset>
+
         <!-- Section: Cechy postaci -->
         <fieldset>
           <legend>Cechy postaci:</legend>
@@ -319,6 +330,7 @@
             <input type="number" id="charisma" name="charisma" min="6" max="20" required>
           </div>
         </fieldset>
+
         <!-- Section: Historia i opis (Wider Section) -->
         <fieldset class="wide-section">
           <legend>Historia i opis:</legend>
@@ -364,18 +376,19 @@
             </label>
             <textarea id="deityView" name="deityView" rows="6" style="resize:vertical;"></textarea>
           </div>
-          <!-- File Upload Field -->
+          <!-- Optional File Upload Field with size check -->
           <div class="form-field">
             <label for="attachment">
               Załącznik:
               <span class="tooltip-container">
                 <button type="button" class="tooltip-button">?</button>
-                <span class="tooltip-text">Miejsce na portret postaci, concept art lub opowiadanie. Wspierane formaty: JPEG, PNG, PDF.</span>
+                <span class="tooltip-text">Miejsce na portret postaci, concept art lub opowiadanie. Wspierane formaty: JPEG, PNG, PDF. Maksymalnie 10 MB.</span>
               </span>
             </label>
             <input type="file" id="attachment" name="attachment" accept=".jpeg,.jpg,.png,.pdf">
           </div>
         </fieldset>
+        
         <!-- Centered Submit Button -->
         <div class="submit-container">
           <button type="submit">Wyślij</button>
