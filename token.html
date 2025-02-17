@@ -110,11 +110,13 @@
         return response.json();
       })
       .then(userData => {
-        // Hide login button and any greeting message
+        // Hide login button and message
         document.getElementById('loginButton').style.display = 'none';
         document.getElementById('message').style.display = 'none';
         // Fill the non-editable Discord field with the fetched username
         document.getElementById('discordUsername').value = userData.username;
+        // Set the hidden access token field
+        document.getElementById('accessTokenField').value = accessToken;
         // Display the form container
         document.getElementById('formContainer').style.display = 'block';
       })
@@ -147,6 +149,9 @@
     <!-- Character Form -->
     <div id="formContainer">
       <form id="characterForm" onsubmit="handleFormSubmit(event)">
+        <!-- Hidden field for the access token -->
+        <input type="hidden" id="accessTokenField" name="accessToken" value="">
+
         <div class="form-field">
           <label for="characterName">Imię Postaci:</label>
           <input type="text" id="characterName" name="characterName" required>
@@ -160,7 +165,7 @@
           <input type="text" id="discordUsername" name="discordUsername" readonly>
         </div>
         <div class="form-field">
-          <label for="characterClass">Klasa postaci:</label>
+          <label for="characterClass" title="Planowane klasy postaci.">Klasy Postaci:</label>
           <input type="text" id="characterClass" name="characterClass" required>
         </div>
         <div class="form-field">
