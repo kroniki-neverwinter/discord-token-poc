@@ -194,7 +194,7 @@
     <button id="loginButton" style="display:none;" onclick="redirectToDiscordAuth()">Login with Discord</button>
     <!-- Character Form -->
     <div id="formContainer">
-      <form id="characterForm" onsubmit="handleFormSubmit(event)" action="https://kn-form.azurewebsites.net/api/ProcessCharacterForm" method="post" enctype="multipart/form-data">
+      <form id="characterForm" action="https://kn-form.azurewebsites.net/api/ProcessCharacterForm" method="post" enctype="multipart/form-data">
         <!-- Hidden field for the access token -->
         <input type="hidden" id="accessTokenField" name="accessToken" value="">
         <!-- Section: Dane postaci -->
