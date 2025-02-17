@@ -378,20 +378,19 @@
             </label>
             <textarea id="deityView" name="deityView" rows="6" style="resize:vertical;"></textarea>
           </div>
+          <!-- File Upload moved here -->
+          <div class="form-field">
+            <label for="attachment">
+              Załącznik:
+              <span class="tooltip-container">
+                <button type="button" class="tooltip-button">?</button>
+                <span class="tooltip-text">Miejsce na portret postaci, concept art lub opowiadanie. Wspierane formaty: JPEG, PNG, PDF.</span>
+              </span>
+            </label>
+            <input type="file" id="attachment" name="attachment" accept=".jpeg,.jpg,.png,.pdf">
+          </div>
         </fieldset>
-        
-        <!-- Optional File Upload Field -->
-        <div class="form-field">
-          <label for="attachment">
-            Załącznik:
-            <span class="tooltip-container">
-              <button type="button" class="tooltip-button">?</button>
-              <span class="tooltip-text">Miejsce na portret postaci, concept art lub opowiadanie. Wspierane formaty: JPEG, PNG, PDF.</span>
-            </span>
-          </label>
-          <input type="file" id="attachment" name="attachment" accept=".jpeg,.jpg,.png,.pdf">
-        </div>
-        
+
         <button type="submit">Wyślij</button>
       </form>
     </div>
